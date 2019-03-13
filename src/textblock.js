@@ -44,18 +44,18 @@ window.Textblock = function(textblocks) {
     onResize(run);
   });
   function run() {
-    each(textblocks, function(rawBlock) {
+    textblocks.forEach(function(rawBlock) {
       // loop through all the provided textblocks
 
       var block = prepBlockSettings(rawBlock);
 
-      each(document.querySelectorAll(block.target), function(el) {
+      document.querySelectorAll(block.target).forEach(function(el) {
         // loop through each element that matches the textblock's selector
 
         if (el) {
           var current_width_ratio = calcCurrentWidthRatio(el, block);
 
-          each(config.supportedProps, function(prop) {
+          config.supportedProps.forEach(function(prop) {
             el.style[prop.propName] = calcCurrentPropValue(
               block,
               prop.propName,
@@ -128,7 +128,7 @@ window.Textblock = function(textblocks) {
     };
 
     // set property-level defaults
-    each(config.supportedProps, function(prop) {
+    config.supportedProps.forEach(function(prop) {
       // set min/maxWidth defaults for props if set in config
       if (prop.minWidthDefault && prop.maxWidthDefault) {
         defaultSettings[getParamName('minWidth', prop.propName)] =
@@ -186,13 +186,6 @@ window.Textblock = function(textblocks) {
         },
         true
       );
-    }
-  }
-  function each(items, callback) {
-    // loops through elements of an array like `Array.prototype.forEach()`
-    // but IE8-friendly and arguably more performant.
-    for (var i = 0; i < items.length; i++) {
-      callback && callback(items[i], i);
     }
   }
   function elWidth(el) {
