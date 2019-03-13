@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
     babel: {
       options: {
-        presets: ['@babel/preset-env'],
+        presets: ['@babel/preset-env'], // applies `browserslist` from package.json
         sourceType: 'script'
       },
       dist: {
