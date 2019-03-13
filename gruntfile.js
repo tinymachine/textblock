@@ -3,6 +3,18 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    babel: {
+      options: {
+        presets: ['@babel/preset-env'],
+        sourceType: 'script'
+      },
+      dist: {
+        files: {
+          'textblock.min.js': 'src/textblock.js'
+        }
+      }
+    },
+
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= pkg.version %> */'
@@ -18,7 +30,7 @@ module.exports = function(grunt) {
           reserveDOMProperties: true // ...or any used by the browser
         },
         files: {
-          'textblock.min.js': ['src/textblock.js']
+          'textblock.min.js': ['textblock.min.js']
         }
       }
     },
@@ -32,10 +44,11 @@ module.exports = function(grunt) {
   });
 
   // Load plugins
+  grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Defaults
   // grunt.registerTask('default', ['postcss:dist','uncss:dist']);
-  grunt.registerTask('default', ['uglify:textblock']);
+  grunt.registerTask('default', ['babel', 'uglify:textblock']);
 };
