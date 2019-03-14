@@ -35,6 +35,17 @@ module.exports = function(grunt) {
       }
     },
 
+    umd: {
+      all: {
+        options: {
+          src: 'textblock.min.js',
+          // dest: 'textblock.umd.js',
+          objectToExport: 'window.Textblock', // optional, internal object that will be exported
+          amdModuleId: 'Textblock' // optional, if missing the AMD module will be anonymous
+        }
+      }
+    },
+
     watch: {
       scripts: {
         files: ['src/textblock.js'],
@@ -47,8 +58,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-umd');
 
   // Defaults
   // grunt.registerTask('default', ['postcss:dist','uncss:dist']);
-  grunt.registerTask('default', ['babel', 'uglify:textblock']);
+  grunt.registerTask('default', ['babel', 'umd:all', 'uglify:textblock']);
 };

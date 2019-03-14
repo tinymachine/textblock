@@ -8,6 +8,7 @@ module.exports = {
   ],
   "env": {
     "browser": true, // lets ESLint know `window` and `document` are defined
-    "node": true // allows `module` to be used for gruntfile.js
+    "node": true, // allows `module` to be used for gruntfile.js
+    "amd": true // allows `require()` and `define()` for use as an AMD (asynchronous module definition) 
   }
 }
